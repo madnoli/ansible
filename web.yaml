@@ -1,0 +1,8 @@
+---
+- hosts: all
+  tasks:
+  - name: Installing the apache web server
+    package:
+      name: httpd
+      state: present
+    ansible_facts['os_family'] == "Debian"
