@@ -5,4 +5,4 @@
     package:
       name: httpd
       state: present
-    ansible_facts['os_family'] == "Debian"
+    when: ansible_facts['os_family'] == "Debian"
