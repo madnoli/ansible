@@ -1,6 +1,6 @@
 ---
 - name: Ping module 
-  host: all
+  hosts: all
   tasks:
   - name: Ping Module show
     ping:
