@@ -28,9 +28,9 @@
     when: ansible_distribution == "Ubuntu"  
     notify: restart chrony
   
-handlers:
-  - name: restart chrony
-    ansible.builtin.service:
+  handlers:
+    - name: restart chrony
+      ansible.builtin.service:
         enabled: yes
         name: chronyd
         state: restarted
