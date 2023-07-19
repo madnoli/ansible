@@ -17,7 +17,7 @@
     copy:
       src: chrony.conf
       dest: /etc/chrony.conf
-    when: ansible_distribution == "openSUSE Leap" or ansible_distribution == "RedHat" or ansible_distribution == "Rocky" or ansible_distribution == "AlmaLinux"
+    when: ansible_distribution == "openSUSE Leap" or ansible_distribution == "RedHat" or ansible_distribution == "Rocky" or ansible_distribution == "AlmaLinux" or ansible_distribution == "CentOS"
 
   - name: Copy the Configuration file to Ubuntu or Debian based system
     copy:
