@@ -15,6 +15,4 @@
     copy:
       src: chrony.conf
       dest: /etc/chrony.conf
-    when: ansible_distribution == "openSUSE Leap" or \
-          ansible_distribution == "RedHat" or \
-          ansible_distribution == "Rocky" 
+    when: ansible_distribution == "openSUSE Leap" or ansible_distribution == "RedHat" or ansible_distribution == "Rocky" 
