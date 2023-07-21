@@ -1,6 +1,0 @@
----
-- name: Playbook for Patching the Servers
-  hosts: all
-  tasks:
-  - name: Subscritpyion manager
-    
