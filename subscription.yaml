@@ -12,4 +12,7 @@
       pool_ids: [] # not required. Specify subscription pool IDs to consume. Prefer over I(pool) when possible as it is much faster.
       force_register: yes # not required. Register the system even if it is already registered
     when: ansible_distribution == "RedHat"
+
+  - name: Subscription for CentOS 7 system
+    subs
     
