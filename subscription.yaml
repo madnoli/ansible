@@ -1,0 +1,14 @@
+---
+- name: Subscription Playbook 
+  hosts: all 
+  tasks:
+  - name: Subscription for Red Hat bases systems
+    redhat_subscription:
+      state: present # not required. choices: present;absent. whether to register and subscribe (C(present)), or unregister (C(absent)) a system
+      username: rajkumar.madnoli  # not required. access.redhat.com or Sat6  username
+      password: asdasdsdasd@2021  # not required. access.redhat.com or Sat6 password
+      #auto_attach: no # not required. Upon successful registration, auto-consume available subscriptions Added in favor of deprecated autosubscribe in 2.5.
+      pool: 
+      pool_ids: [] # not required. Specify subscription pool IDs to consume. Prefer over I(pool) when possible as it is much faster.
+      force_register: yes # not required. Register the system even if it is already registered
+      
