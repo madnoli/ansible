@@ -1,0 +1,7 @@
+---
+- name: Unsubscribe the system from Red Hat Subscription
+  hosts: all
+  tasks:
+  - name: Unsubscribe the system from Red Hat Subscription
+    redhat_subscription:
+      state: "absent"

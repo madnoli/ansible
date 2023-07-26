@@ -14,5 +14,34 @@
     when: ansible_distribution == "RedHat"
 
   - name: Subscription for CentOS 7 system
-    subs
+    - name: Description
+      community.general.redhat_subscription:
+        activationkey: string
+        auto_attach: false
+        consumer_id: string
+        consumer_name: string
+        consumer_type: string
+        environment: string
+        force_register: false
+        org_id: string
+        password: string
+        pool: ^
+        pool_ids:
+          - element
+        release: string
+        rhsm_baseurl: string
+        rhsm_repo_ca_cert: string
+        server_hostname: string
+        server_insecure: string
+        server_port: string
+        server_prefix: string
+        server_proxy_hostname: string
+        server_proxy_password: string
+        server_proxy_port: string
+        server_proxy_scheme: string
+        server_proxy_user: string
+        state: present
+        token: string
+        username: string
     
+  
