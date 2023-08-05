@@ -14,7 +14,7 @@
       state: absent 
   
   - name: Re-Registering the centos 7 servers to foreman
-    community.general.redhat_subscription:
+    redhat_subscription:
         state: present
         activationkey: "CentOS 7 NON PROD"
         org_id: "ReBIT"
@@ -22,7 +22,7 @@
     when:  ansible_distribution == 'CentOS'
 
   - name: Re-Registering the Rocky linux 8 servers to foreman
-    community.general.redhat_subscription:
+    redhat_subscription:
         state: present
         activationkey: "Rocky Linux 8"
         org_id: "ReBIT"
@@ -36,7 +36,7 @@
 
     
   - name: Re-Registering the ubuntu desktop to foreman
-    community.general.redhat_subscription:
+    redhat_subscription:
         state: present
         activationkey: "Ubuntu 20.04 Development Desktop"
         org_id: "ReBIT"
@@ -50,7 +50,7 @@
 
     
   - name: Re-Registering the ubuntu servers to foreman
-    community.general.redhat_subscription:
+    redhat_subscription:
         state: present
         activationkey: "ubuntu2004server_nonprod"
         org_id: "ReBIT"
