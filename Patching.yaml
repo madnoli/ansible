@@ -5,7 +5,8 @@
   become_method: sudo
   become_user: root
   vars: 
-    - kernel: "hold"
+    - hold: "yes"
+    - unhold: "no"
   tasks:
   - name: Need to delete the cache file before proceeding for Patching
     file:
@@ -58,8 +59,11 @@
   
   - name: To hold the kernel pacthing for ubuntu
     shell: apt-mark hold $(uname -r)
-    when:  ansible_distribution == 'Ubuntu' and ansible_distribution_version == '20.04' 
+    when:  ansible_distribution == 'Ubuntu' and ansible_distribution_version == '20.04' and hold == "yes"
   
+  - name: To hold the kernel pacthing for ubuntu
+    shell: sudo apt-mark unhold $(apt-mark showhold)
+    when:  ansible_distribution == 'Ubuntu' and ansible_distribution_version == '20.04' and unhold== "yes"
 
     
   
