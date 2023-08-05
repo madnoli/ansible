@@ -59,6 +59,33 @@
     shell: sudo apt-mark unhold $(apt-mark showhold)
     when:  ansible_distribution == 'Ubuntu' and ansible_distribution_version == '20.04' and unhold== "yes"
   
-  - name: Patch the CentOS 7 
+  - name: Play for getting the file name containg the proxy details
+    find:
+      paths: /etc/profile.d
+      recurse: yes
+      file_type: file
+    register: found_files 
+    when: ansible_host == '172.17.60.137'
+
+  - name: comment out the specific lines in the file
+    lineinfile:
+      path: "{{ item.path }}"
+      backup: yes
+      regexp: '(export http_proxy=http://172.23.37.4:8080)'
+      line: '#\1'
+      backrefs: yes
+    loop: "{{ found_files.files }}"
+    when: ansible_host == '172.17.60.137'
+
+  - name: comment out the specific lines in the file
+    lineinfile:
+      path: "{{ item.path }}"
+      backup: yes
+      regexp: '(export https_proxy=http://172.23.37.4:8080)'
+      line: '#\1'
+      backrefs: yes
+    loop: "{{ found_files.files }}"
+    when: ansible_host == '172.17.60.137'
+
   
       
