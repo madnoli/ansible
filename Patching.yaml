@@ -58,6 +58,7 @@
   - name: To hold the kernel pacthing for ubuntu
     shell: sudo apt-mark unhold $(apt-mark showhold)
     when:  ansible_distribution == 'Ubuntu' and ansible_distribution_version == '20.04' and unhold== "yes"
-    
+  
+  - name: Patch the CentOS 7 
   
       
