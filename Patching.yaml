@@ -169,8 +169,7 @@
       autoremove: yes 
       skip_broken: yes 
       update_cache: yes 
-   when: ansible_distribution == "RedHat" and ansible_distribution_major_version == '8' and ansible_host != "172.17.49.173" and ansible_host != "172.17.49.172"  and ansible_host != "172.17.49.163" and ansible_host != "172.17.49.154"  
-  
+    when: ansible_distribution == "RedHat" and ansible_distribution_major_version == '8' and ansible_host != "172.17.49.173" and ansible_host != "172.17.49.172"  and ansible_host != "172.17.49.163" and ansible_host != "172.17.49.154"  
 
   - name: Check if reboot required file exist in ubuntu 
     stat:
