@@ -148,22 +148,22 @@
     redhat_subscription:
       state: present 
       username:  rajkumar.madnoli 
-      password:  Welcome@2021 
-    when: ansible_distribution == "RedHat" and ansible_distribution_major_version == '8'
+      password:  xxxxxxxxxx 
+    when: ansible_distribution == "RedHat" and ansible_distribution_major_version == '8' and ansible_host != "172.17.49.173" and ansible_host != "172.17.49.172"  and ansible_host != "172.17.49.163" and ansible_host != "172.17.49.154"  when: ansible_distribution == "RedHat" and ansible_distribution_major_version == '8'
   
   - name: enable Required repo for the systems
     rhsm_repository:
       state: present 
       name: "{{ item  }}" 
       purge: False 
-    when: ansible_distribution == "RedHat" and ansible_distribution_major_version == '8' and ansible_host != "172.17.49.173" and ansible_host != "172.17.49.172"  
+    when: ansible_distribution == "RedHat" and ansible_distribution_major_version == '8' and ansible_host != "172.17.49.173" and ansible_host != "172.17.49.172"  and ansible_host != "172.17.49.163" and ansible_host != "172.17.49.154"  
+
   - name: Update the Red Hat 8 system
     dnf:
-      name: * # required. A package name or package specifier with version, like C(name-1.0). When using state=latest, this can be '*' which means run: dnf -y update. You can also pass a url or a local path to a rpm file. To operate on several packages this can accept a comma separated string of packages or a list of packages.
-      state: latest # not required. choices: absent;present;installed;removed;latest. Whether to install (C(present), C(latest)), or remove (C(absent)) a package. Default is C(None), however in effect the default action is C(present) unless the C(autoremove) option is enabled for this module, then C(absent) is inferred.
-      enablerepo:  # not required. I(Repoid) of repositories to enable for the install/update operation. These repos will not persist beyond the transaction. When specifying multiple repos, separate them with a ",".
-      disablerepo:  # not required. I(Repoid) of repositories to disable for the install/update operation. These repos will not persist beyond the transaction. When specifying multiple repos, separate them with a ",".
-      autoremove: yes # not required. If C(yes), removes all "leaf" packages from the system that were originally installed as dependencies of user-installed packages but which are no longer required by any such package. Should be used alone or when state is I(absent)
+      name: "*"
+      state: latest 
+      autoremove: yes 
       skip_broken: yes 
       update_cache: yes 
+   when: ansible_distribution == "RedHat" and ansible_distribution_major_version == '8' and ansible_host != "172.17.49.173" and ansible_host != "172.17.49.172"  and ansible_host != "172.17.49.163" and ansible_host != "172.17.49.154"  
       
