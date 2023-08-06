@@ -87,7 +87,20 @@
     shell: sudo apt-mark unhold $(apt-mark showhold)
     when:  ansible_distribution == 'Ubuntu' and ansible_distribution_version == '20.04' and unhold== "yes"
   
-  - name: Remove all repo exculding redhat.repo
+  - name: Find all files in the directory
+    find:
+        paths: /etc/yum.repos.d/
+        file_type: file
+    register: found_files
+    when: (ansible_distribution == 'CentOS' and ansible_distribution_major_version == '7') or
+            (ansible_distribution == 'Rocky' and ansible_distribution_major_version == '8')
+
+  - name: Move files except redhat.repo
+    command: mv -f "{{ item.path }}" "/etc/yum.repos.d/old_repo/{{ item.path | basename }}"
+    when: (item.path != "/etc/yum.repos.d/redhat.repo") and
+            ((ansible_distribution == 'CentOS' and ansible_distribution_major_version == '7') or
+            (ansible_distribution == 'Rocky' and ansible_distribution_major_version == '8'))
+    with_items: "{{ found_files.files }}"
     
   
   - name: Patch the CentOS 7 servers
