@@ -234,7 +234,7 @@
 
   - name: Reseting  the Proxy Status of server '172.17.60.137'
     find:
-      paths: /etc/profile.d
+      paths: /etc/profile.d/
       recurse: yes
       file_type: file
     register: found_files 
