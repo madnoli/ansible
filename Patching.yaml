@@ -149,7 +149,7 @@
       state: present 
       username:  rajkumar.madnoli 
       password:  xxxxxxxxxx 
-    when: ansible_distribution == "RedHat" and ansible_distribution_major_version == '8' and ansible_host != "172.17.49.173" and ansible_host != "172.17.49.172"  and ansible_host != "172.17.49.163" and ansible_host != "172.17.49.154"  when: ansible_distribution == "RedHat" and ansible_distribution_major_version == '8'
+    when: ansible_distribution == "RedHat" and ansible_distribution_major_version == '8' and ansible_host != "172.17.49.173" and ansible_host != "172.17.49.172"  and ansible_host != "172.17.49.163" and ansible_host != "172.17.49.154"  
   
   - name: enable Required repo for the systems
     rhsm_repository:
@@ -157,6 +157,10 @@
       name: "{{ item  }}" 
       purge: False 
     when: ansible_distribution == "RedHat" and ansible_distribution_major_version == '8' and ansible_host != "172.17.49.173" and ansible_host != "172.17.49.172"  and ansible_host != "172.17.49.163" and ansible_host != "172.17.49.154"  
+    with_items:
+      - rhel-8-for-x86_64-baseos-rpms
+      - codeready-builder-for-rhel-8-x86_64-rpms
+      - rhel-8-for-x86_64-appstream-rpms
 
   - name: Update the Red Hat 8 system
     dnf:
