@@ -126,7 +126,19 @@
       autoremove: true
     when: ansible_distribution == 'Ubuntu' 
 
+  - name: Update YUM package cache
+    yum:
+        name: '*'
+        state: latest
+        disable_gpg_check: yes
+        skip_broken: yes
+        update_cache: yes
+    when: ansible_distribution == 'CentOS' and ansible_distribution_major_version == '7'
+    
   
+
+
+
 
 
     
