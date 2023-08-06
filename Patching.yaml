@@ -101,5 +101,36 @@
             ((ansible_distribution == 'CentOS' and ansible_distribution_major_version == '7') or
             (ansible_distribution == 'Rocky' and ansible_distribution_major_version == '8'))
     with_items: "{{ found_files.files }}"
+  
+
+  - name: Update APT package cache for ubuntu bases system
+    apt:
+        update_cache: yes
+    when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '20.04'
+  
+  - name: Upgrade all packages of ubuntu 20.04 system
+    apt:
+      name: "*"
+      state: latest
+    when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '20.04'
+  
+  - name: Upgrade all packages of ubuntu 18.04 system
+    apt:
+      name: "*"
+      state: latest
+    when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '18.04'
+
+  - name: Remove the unwanted packages installed on ubuntu servers 
+    apt:
+      autoclean: true
+      autoremove: true
+    when: ansible_distribution == 'Ubuntu' 
+
+  
+
+
+    
+
+    
     
   
