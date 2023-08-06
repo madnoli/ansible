@@ -231,3 +231,31 @@
       - ansible_distribution_major_version == "8"
       - yum_update_rhel8.changed
       - (yum_update_rhel8.results[0] | regex_search('kernel')) is not none
+
+  - name: Reseting  the Proxy Status of server '172.17.60.137'
+    find:
+      paths: /etc/profile.d
+      recurse: yes
+      file_type: file
+    register: found_files 
+    when: ansible_host == '172.17.60.137'
+
+  - name: comment out the specific lines in the file
+    lineinfile:
+      path: "{{ item.path }}"
+      backup: yes
+      regexp: '(#export http_proxy=http://172.23.37.4:8080)'
+      line: '\1'
+      backrefs: yes
+    loop: "{{ found_files.files }}"
+    when: ansible_host == '172.17.60.137'
+
+  - name: comment out the specific lines in the file
+    lineinfile:
+      path: "{{ item.path }}"
+      backup: yes
+      regexp: '(#export https_proxy=http://172.23.37.4:8080)'
+      line: '\1'
+      backrefs: yes
+    loop: "{{ found_files.files }}"
+    when: ansible_host == '172.17.60.137'
