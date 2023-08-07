@@ -2,8 +2,8 @@
 - name: Playbook for User Cretation
   hosts:  localhost
   vars:
-    username: vmpg
-    password: "L!nux@123"
+    username: "ssssssssssssssssssss"
+    password: "********************************"
   tasks:
   - name: Create user
     user:
