@@ -259,7 +259,8 @@
       backrefs: yes
     loop: "{{ found_files.files }}"
     when: ansible_host == '172.17.60.137'
-- name:: Unsuscrbe Red Hat 8 Servers from redhat portal
+
+  - name: Unsuscrbe Red Hat 8 Servers from redhat portal
     redhat_subscription:
       state: absent
       username:  rajkumar.madnoli 
