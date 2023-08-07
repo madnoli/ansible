@@ -12,6 +12,7 @@
     file:
       path: /var/cache # required. Path to the file being managed.
       state: absent 
+      
   - name: Play for getting the file name containg the proxy details
     find:
       paths: /etc/profile.d
