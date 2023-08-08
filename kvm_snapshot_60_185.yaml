@@ -1,13 +1,15 @@
 ---
 - name: Playbook to take the snapshot of VMS hosted on KVM
   hosts: 172.17.60.185
+  vars:
+    random_number: "{{ range(100000, 999999) | random }}"
   tasks:
   - name: Collectin today's date
     set_fact:
         current_date: "{{ ansible_date_time.date }}"
   - name: Format date as snapshot-dd-mm-yyyy
     set_fact:
-        formatted_date: "snapshot-{{ current_date.split('-')[2] }}-{{ current_date.split('-')[1] }}-{{ current_date.split('-')[0] }}"
+        formatted_date: "snapshot-{{ current_date.split('-')[2] }}-{{ current_date.split('-')[1] }}-{{ current_date.split('-')[0] }}-{{random_number}}"
   
   - name: Plabook to Create the snapshot of VMS hosted on KVM
     shell:  "virsh snapshot-create-as --domain {{ item }}  --name {{ formatted_date }} " 
