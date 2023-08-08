@@ -1,0 +1,69 @@
+---
+- name: Playbook for installation of AV
+  hosts: all
+  tasks:
+  - name: Need to delete the cache file before proceeding for Patching
+    file:
+      path: /var/cache # required. Path to the file being managed.
+      state: absent 
+  
+  - name: Install unzip Package
+    yum:
+      name: unzip
+      state: latest
+      skip_broken: yes
+      disable_gpg_check: yes
+      update_cache: yes
+    when:  ansible_distribution == "CentOS" or  ansible_distribution == "Rocky"
+  
+  - name: Subscribe the RHEL 8 to Red Hat Portal for installing the unzip package 
+    redhat_subscription:
+      state: present 
+      username:  rajkumar.madnoli 
+      password:  xxxxxxxxxx 
+    when: ansible_distribution == "RedHat" and ansible_distribution_major_version == '8' and ansible_host != "172.17.49.173" and ansible_host != "172.17.49.172"  and ansible_host != "172.17.49.163" and ansible_host != "172.17.49.154"  
+  
+  - name: Enabling the Required Repo for unzip package installation
+    rhsm_repository:
+      state: present 
+      name: "{{ item  }}" 
+      purge: False 
+    when: ansible_distribution == "RedHat" and ansible_distribution_major_version == '8' and ansible_host != "172.17.49.173" and ansible_host != "172.17.49.172"  and ansible_host != "172.17.49.163" and ansible_host != "172.17.49.154"  
+    with_items:
+      - rhel-8-for-x86_64-baseos-rpms
+      - codeready-builder-for-rhel-8-x86_64-rpms
+      - rhel-8-for-x86_64-appstream-rpms
+
+  - name: Install Unzip Package on Red Hat 8 system
+    dnf:
+      name: unzip
+      state: latest 
+      autoremove: yes 
+      skip_broken: yes 
+      update_cache: yes 
+    when: 
+    - ansible_distribution == "RedHat" 
+    - ansible_distribution_major_version == '8' 
+    - ansible_host != "172.17.49.173" 
+    - ansible_host != "172.17.49.172"  
+    - ansible_host != "172.17.49.163" 
+    - ansible_host != "172.17.49.154"  
+  
+  - name: Unsuscrbe Red Hat 8 Servers from redhat portal
+    redhat_subscription:
+      state: absent
+      username:  rajkumar.madnoli 
+      password:  xxxxxxxxxx 
+    when: 
+    - ansible_distribution == "RedHat"
+    - ansible_distribution_major_version == '8'
+    - ansible_host != "172.17.49.173"
+    - ansible_host != "172.17.49.172"
+    - ansible_host != "172.17.49.163"
+    - ansible_host != "172.17.49.154"
+  
+  - name: Copy the Antivirus setup file in ansadmin home directory.
+    copy:
+
+
+
