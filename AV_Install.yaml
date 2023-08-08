@@ -61,10 +61,24 @@
     - ansible_host != "172.17.49.172"
     - ansible_host != "172.17.49.163"
     - ansible_host != "172.17.49.154"
-  
+
+  - name: Craete the seperate the AV directory in remote host
+    file:
+      stae: directory
+      path: /home/ansadmin/AV
+       
+  - name: Craete the seperate the AV directory in remote host
+    file:
+      stae: directory
+      path: /home/ansadmin/AV
+      owener: root
+      group: root
+      mode: 0755
+
   - name: Copy the Antivirus setup file in ansadmin home directory.
     copy:
-      src:
-
+      src: /home/ansadmin/avsetup.zip
+      dest: /home/ansadmin/AV
+  
 
 
