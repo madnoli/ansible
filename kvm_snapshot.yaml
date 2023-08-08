@@ -11,7 +11,7 @@
   
   - name: Plabook to Create the snapshot of VMS hosted on KVM
     shell:  "virsh snapshot-create-as --domain {{ item }}  --name {{ formatted_date }} " 
-     with_items:
+    with_items:
       - app_server_centos7_ud-project
       - CSAD_DB
       - db_server_centos7_ud-project
