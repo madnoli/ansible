@@ -8,9 +8,9 @@
   - name: Format date as snapshot-dd-mm-yyyy
     set_fact:
         formatted_date: "snapshot-{{ current_date.split('-')[2] }}-{{ current_date.split('-')[1] }}-{{ current_date.split('-')[0] }}"
-
+  
   - name: Plabook to Create the snapshot of VMS hosted on KVM
-    shell: 
+    shell:  "virsh snapshot-create-as --domain {{ item }}  --name {{ formatted_date }} " 
      with_items:
       - app_server_centos7_ud-project
       - CSAD_DB
