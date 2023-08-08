@@ -1,6 +1,6 @@
 ---
 - name: Playbook to take the snapshot of VMS hosted on KVM
-  hosts: 172.17.60.90
+  hosts: 172.17.60.185
   tasks:
   - name: Collectin today's date
     set_fact:
@@ -12,10 +12,8 @@
   - name: Plabook to Create the snapshot of VMS hosted on KVM
     shell:  "virsh snapshot-create-as --domain {{ item }}  --name {{ formatted_date }} " 
     with_items:
-      - app_server_centos7_ud-project
-      - CSAD_DB
-      - db_server_centos7_ud-project
-      - docker_centos7_ng_thmap
-      - Kruti_DOR1
-      - Paresh_Patil_ECM-Demo
-      - web_server_centos7_ud-project
+      - frs_app_server_weblogic_testing_env-120
+      - frs_web_server_ohs_dev_env-119
+      - frs_web_server_ohs_testing_env-96
+      - hadoop_cluster-ubuntu20.04
+      - thm-test
