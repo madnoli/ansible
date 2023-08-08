@@ -18,6 +18,5 @@
       - frs_web_server_ohs_dev_env-119
       - frs_web_server_ohs_testing_env-96
       - hadoop_cluster-ubuntu20.04
-      - thm-test
-
+      
       
