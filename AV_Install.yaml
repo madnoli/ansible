@@ -64,6 +64,7 @@
   
   - name: Copy the Antivirus setup file in ansadmin home directory.
     copy:
+      src:
 
 
 
