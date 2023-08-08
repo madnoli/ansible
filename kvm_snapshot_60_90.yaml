@@ -1,0 +1,21 @@
+---
+- name: Playbook to take the snapshot of VMS hosted on KVM
+  hosts: 172.17.60.90
+  tasks:
+  - name: Collectin today's date
+    set_fact:
+        current_date: "{{ ansible_date_time.date }}"
+  - name: Format date as snapshot-dd-mm-yyyy
+    set_fact:
+        formatted_date: "snapshot-{{ current_date.split('-')[2] }}-{{ current_date.split('-')[1] }}-{{ current_date.split('-')[0] }}"
+  
+  - name: Plabook to Create the snapshot of VMS hosted on KVM
+    shell:  "virsh snapshot-create-as --domain {{ item }}  --name {{ formatted_date }} " 
+    with_items:
+      - app_server_centos7_ud-project
+      - CSAD_DB
+      - db_server_centos7_ud-project
+      - docker_centos7_ng_thmap
+      - Kruti_DOR1
+      - Paresh_Patil_ECM-Demo
+      - web_server_centos7_ud-project
