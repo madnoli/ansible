@@ -203,7 +203,7 @@
       - ansible_distribution == 'CentOS'  
       - ansible_distribution_major_version == "7"
       - yum_update_centos7.changed
-      - (yum_update_centos7.results[0] | regex_search('kernel')) is not none
+      - yu(m_update_centos7.results[0] | regex_search('kernel')) is not none
 
   - name: Rebooting the required Rocky8 systems
     reboot:
