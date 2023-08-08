@@ -1,7 +1,0 @@
----
-- name: Ping module 
-  hosts: all
-  tasks:
-  - name: Ping Module show
-    ping:
-      data: pong # not required. Data to return for the C(ping) return value. If this parameter is set to C(crash), the module will cause an exception.
