@@ -31,7 +31,7 @@
       skip_broken: yes
       disable_gpg_check: yes
       update_cache: yes
-    when:  ansible_distribution == "CentOS" or  ansible_distribution == "Rocky"
+    when:  ansible_distribution == "CentOS" or  ansible_distribution == "Rocky" or ansible_distribution == "OracleLinux"
   
   - name: Subscribe the RHEL 8 to Red Hat Portal for installing the unzip package 
     redhat_subscription:
