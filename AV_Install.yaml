@@ -5,7 +5,9 @@
   - name: Need to delete the cache file before proceeding for Patching
     file:
       path: /var/cache # required. Path to the file being managed.
-      state: absent 
+      state: absent
+    when: 
+    - ansible_distribution == "RedHat" or ansible_distribution =="Rocky"  or ansible_distribution == "CentOS"
   
   - name: Find all files in the directory /etc/yum.repos.d/
     find:
